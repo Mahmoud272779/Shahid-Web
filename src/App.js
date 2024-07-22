@@ -1,48 +1,38 @@
-import { Container } from "react-bootstrap";
-import UpperNavBar from "./components/UpperNavBar";
-import Header from "./components/Header";
-import Category from "./Category";
-import CardItem from "./CardItem";
-import { items } from "./data";
-import { useState } from "react";
-
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { Navbar } from 'react-bootstrap';
+import NavBar from './components/NavBar'
+import MoviesList from './components/MoviesList';
 
 function App() {
-  const [itemsData,setitemsData]=useState(items);
-  const allCats=['الكل',...new Set( items.map((i)=>i.category))]
-  const filterByCat=(cat)=>{
-    if(cat=='الكل')
-      {
-      return  setitemsData(items)
-      }
-   const filteredData= items.filter((c)=>{
-      return c.category==cat
-    })
-    setitemsData(filteredData)
-  }
-
-  const filterByWord=(w)=>{
-    if(w!=="")
-      {
-        const searchData= items.filter((c)=>{
-          return c.title==w
-        })
-        setitemsData(searchData)
-      }
-  
-  }
-
-  return (
-    <div className="color-body font">
-     <UpperNavBar search={filterByWord}></UpperNavBar>
-    <Container>
-<Header></Header>
-<Category allCats={allCats} func={filterByCat}></Category>
-<CardItem itemsData={itemsData}></CardItem>
-    </Container>
-
-    </div>
-  );
+  const [movies,setmovies]=useState([])
+  const getAllMovies=async ()=>{
+ const res=await axios.get("https://api.themoviedb.org/3/person/popular?language=ar&page=1&api_key=675e2d4e494c3d2d212e5237fe047d61")
+ setmovies(res.data.results)
+ 
 }
+
+const getSearchedMovies=async (word)=>{
+  if(word=="")
+    return getAllMovies()
+  const res=await axios.get(`https://api.themoviedb.org/3/search/movie?query=`+word+"&api_key=675e2d4e494c3d2d212e5237fe047d61")
+  setmovies(res.data.results)
+  
+ }
+  
+useEffect(()=>{
+ 
+   getAllMovies();
+  console.log(movies)
+  
+},[])
+  return (<div>
+
+<NavBar search={getSearchedMovies}></NavBar>
+<MoviesList movies={movies}></MoviesList>
+  </div>)
+    
+}
+
 
 export default App;
