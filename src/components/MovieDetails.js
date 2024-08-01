@@ -8,10 +8,11 @@ const MovieDetails = () => {
 
     //get  movie by details 
     const getMovieDetails = async () => {
-        const res = await axios.get(`https://api.themoviedb.org/3/movie/${param.id}?api_key=52ef927bbeb21980cd91386a29403c78&language=ar`)
+        const res = await axios.get(`https://api.themoviedb.org/3/movie/${param.ids}?api_key=52ef927bbeb21980cd91386a29403c78&language=ar`)
         setMovie(res.data)
     }
     useEffect(() => {
+        console.log(param)
         getMovieDetails();
     }, [])
     return (

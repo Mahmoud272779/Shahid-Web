@@ -2,17 +2,19 @@ import React from 'react'
 
 import ReactPaginate from 'react-paginate';
 
-const PaginationComponent = ({ getPage ,pageCount}) => {
+const PaginationComponent = ({ getPage ,pageCount ,word}) => {
     const handlePageClick = (data) => {
         console.log(data.selected + 1)
-        getPage(data.selected + 1)
+        getPage(data.selected + 1,word)
     }
     return (
         <>
         <ReactPaginate
             breakLabel="..."
             nextLabel="التالى"
-            onPageChange={(e)=>{getPage(e.selected+1)}}
+            onPageChange={(e)=>{
+                getPage(e.selected+1,word)
+                console.log(word)}}
             marginPagesDisplayed={2}
             pageRangeDisplayed={2}
             pageCount={pageCount}
