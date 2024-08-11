@@ -60,7 +60,7 @@ console.log(mData)
 <h2>{mData}</h2>
 <button onClick={()=>disp(getAll())}>show </button>
 <button onClick={()=>disp(hideall())}>hisw </button>
-.-
+
 
   </div>)
     
