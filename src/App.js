@@ -16,12 +16,12 @@ const [word,setSearchWord]=useState('')
 const mData=useSelector(s=>s.movies)
 const disp=useDispatch();
   const getAllMovies=async ()=>{
- const res=await axios.get("https://api.themoviedb.org/3/person/popular?language=ar&api_key=675e2d4e494c3d2d212e5237fe047d61")
- setmovies(res.data.results)
- setisSearch(false)
- setTotalPages(res.data.total_pages)
+//const res=await axios.get("https://api.themoviedb.org/3/person/popular?language=ar&api_key=675e2d4e494c3d2d212e5237fe047d61")
+//  setmovies(res.data.results)
+//  setisSearch(false)
+//  setTotalPages(res.data.total_pages)
  
-}
+ }
 
 const getSearchedMovies=async (word)=>{
   if(word=="")
@@ -48,7 +48,7 @@ const getSearchedMovies=async (word)=>{
  }
 useEffect(()=>{
   
-  disp(hideall())
+  disp(getAll())
   
 
 
@@ -57,13 +57,15 @@ useEffect(()=>{
 },[])
 console.log(mData)
   return (<div>
-<h2>{mData}</h2>
+  {mData.map(c=>{
+    return(
+    <h5>{c.id}</h5>)
+  })}
+
 <button onClick={()=>disp(getAll())}>show </button>
 <button onClick={()=>disp(hideall())}>hisw </button>
 
-<h4>fddfg</h4>
-<h5>jhj</h5>
-<h6>jkh</h6>
+
   </div>)
     
 }
