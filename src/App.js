@@ -47,8 +47,8 @@ const getSearchedMovies=async (word)=>{
 
  }
 useEffect(()=>{
-  disp(getAll())
-   getAllMovies();
+  
+  disp(hideall())
   
 
 
