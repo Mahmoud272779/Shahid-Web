@@ -61,7 +61,9 @@ console.log(mData)
 <button onClick={()=>disp(getAll())}>show </button>
 <button onClick={()=>disp(hideall())}>hisw </button>
 
-
+<h4>fddfg</h4>
+<h5>jhj</h5>
+<h6>jkh</h6>
   </div>)
     
 }
