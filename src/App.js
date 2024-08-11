@@ -5,12 +5,16 @@ import NavBar from './components/NavBar'
 import MoviesList from './components/MoviesList';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MovieDetails from './components/MovieDetails';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAll, hideall } from './redux/actions/actionMovie';
 
 function App() {
 const [movies,setmovies]=useState([])
 const [isSearch,setisSearch]=useState(false)
 const [totalPages,setTotalPages]=useState(0)
 const [word,setSearchWord]=useState('')
+const mData=useSelector(s=>s.movies)
+const disp=useDispatch();
   const getAllMovies=async ()=>{
  const res=await axios.get("https://api.themoviedb.org/3/person/popular?language=ar&api_key=675e2d4e494c3d2d212e5237fe047d61")
  setmovies(res.data.results)
@@ -43,22 +47,20 @@ const getSearchedMovies=async (word)=>{
 
  }
 useEffect(()=>{
- 
+  disp(getAll())
    getAllMovies();
+  
+
+
   console.log(movies)
   
 },[])
+console.log(mData)
   return (<div>
-
-<NavBar search={getSearchedMovies }  passWordToApp={setSearchWord}></NavBar>
-<BrowserRouter>
-  <Routes>
-    <Route path='/' element={<MoviesList movies={movies} isSearchParam={isSearch} pageCount={totalPages}
-getPage={getPage} word={word}></MoviesList>}></Route>
- <Route path="/movie/:ids" element={<MovieDetails />} />
-
-  </Routes>
-</BrowserRouter>
+<h2>{mData}</h2>
+<button onClick={()=>disp(getAll())}>show </button>
+<button onClick={()=>disp(hideall())}>hisw </button>
+.-
 
   </div>)
     
