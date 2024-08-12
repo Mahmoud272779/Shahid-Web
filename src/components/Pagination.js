@@ -1,20 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ReactPaginate from 'react-paginate';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPageCount } from '../redux/actions/actionMovie';
 
-const PaginationComponent = ({ getPage ,pageCount ,word}) => {
-    const handlePageClick = (data) => {
-        console.log(data.selected + 1)
-        getPage(data.selected + 1,word)
-    }
+const PaginationComponent = () => {
+
+    // const handlePageClick = (data) => {
+    //     console.log(data.selected + 1)
+    //     getPage(data.selected + 1)
+    // }
+    const [pageCount,setPageCount]=useState(0)
+    const [SW,setSW]=useState(0)
+    const pages=useSelector(s=>s.pages)
+    const searchWord=useSelector(s=>s.searchWord)
+    console.log(searchWord)
+    console.log(pages)
+    const dispatch=useDispatch()
+    useEffect(()=>{
+        setPageCount(pages)
+        setSW(searchWord)
+      },[])
+      useEffect(()=>{
+        setPageCount(pages)
+        setSW(searchWord)
+      },[pages])
     return (
         <>
         <ReactPaginate
             breakLabel="..."
             nextLabel="التالى"
             onPageChange={(e)=>{
-                getPage(e.selected+1,word)
-                console.log(word)}}
+                dispatch(getPageCount( e.selected+1,SW))
+                }}
             marginPagesDisplayed={2}
             pageRangeDisplayed={2}
             pageCount={pageCount}

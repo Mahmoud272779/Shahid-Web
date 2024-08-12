@@ -5,7 +5,7 @@ import  {Link}  from 'react-router-dom'
 
 const CardMovie = ({ mov }) => {
   const SP=useSelector(s=>s.SP)
-  console.log(SP)
+  
   return (
     <Col xs="6" sm="6" md="4" lg="3" className="my-1">
      <Link to={`/movie/${ mov.id}`}>

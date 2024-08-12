@@ -10,11 +10,13 @@ const MoviesList = ({  getPage, pageCount,isSearchParam ,word}) => {
   
   const dataMovies=useSelector(s=>s.movies)
   const SP=useSelector(s=>s.SP)
-  
+  const sw=useSelector(s=>s.searchWord)
 const disp=useDispatch();
+console.log(SP)
 useEffect(()=>{
+  
   if(!SP){
-  disp(getAll())
+  disp(getAll(sw))
   setMovies(dataMovies)
   }
 },[])
@@ -30,7 +32,7 @@ console.log(dataMovies)
       })) : <h2 className="text-center p-5">لا يوجد افلام...</h2>}
 
       
-      <PaginationComponent getPage={getPage} pageCount={pageCount} word={word}  />
+      <PaginationComponent />
     </Row>
   );
 };
