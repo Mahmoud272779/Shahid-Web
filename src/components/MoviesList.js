@@ -9,15 +9,20 @@ import { getAll } from "../redux/actions/actionMovie";
 const MoviesList = ({  getPage, pageCount,isSearchParam ,word}) => {
   
   const dataMovies=useSelector(s=>s.movies)
+  const SP=useSelector(s=>s.SP)
+  
 const disp=useDispatch();
 useEffect(()=>{
+  if(!SP){
   disp(getAll())
+  setMovies(dataMovies)
+  }
 },[])
 const [movies,setMovies]=useState([])
 useEffect(()=>{
   setMovies(dataMovies)
 },[dataMovies])
-
+console.log(dataMovies)
   return (
     <Row className="mt-3">
       {movies.length >= 1 ? (movies.map((mov) => {

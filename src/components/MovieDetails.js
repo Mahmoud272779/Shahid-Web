@@ -27,7 +27,7 @@ const MovieDetails = () => {
                         />
                         <div className="justify-content-center text-center  mx-auto">
                             <p className="card-text-details border-bottom">
-                                اسم الفيلم: {movie.title}
+                                اسم الفيلم: {movie.original_title}
                             </p>
                             <p className="card-text-details border-bottom">
                                 تاريخ الفيلم :{movie.release_date}
