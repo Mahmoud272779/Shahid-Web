@@ -13,7 +13,7 @@ const NavBar = () => {
     
     if(word=="")
       return dispatch(getAll())
-    dispatch(getSearchedMovies(word))
+    return dispatch(getSearchedMovies(word))
   }
   
   return (
