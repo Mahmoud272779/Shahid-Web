@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Row, Card, Col } from "react-bootstrap";
 import CardMovie from "./CardMovie";
 import PaginationComponent from "./Pagination";
@@ -7,11 +7,17 @@ import { getAll } from "../redux/actions/actionMovie";
 //import PaginationComponent from './Pagination'
 
 const MoviesList = ({  getPage, pageCount,isSearchParam ,word}) => {
-  const movies=useSelector(s=>s.movies)
+  
+  const dataMovies=useSelector(s=>s.movies)
 const disp=useDispatch();
 useEffect(()=>{
   disp(getAll())
 },[])
+const [movies,setMovies]=useState([])
+useEffect(()=>{
+  setMovies(dataMovies)
+},[dataMovies])
+
   return (
     <Row className="mt-3">
       {movies.length >= 1 ? (movies.map((mov) => {
