@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import logo from './logo.png'
 //import { Link } from 'react-router-dom'
-const NavBar = ({ search,passWordToApp }) => {
+const NavBar = () => {
 
   
   return (
