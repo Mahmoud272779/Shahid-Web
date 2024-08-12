@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Col, Row } from "react-bootstrap";
 import logo from './logo.png'
+import { useDispatch } from "react-redux";
+import { getAll, getSearchedMovies } from "../redux/actions/actionMovie";
+
 //import { Link } from 'react-router-dom'
 const NavBar = () => {
+ 
+  const dispatch=useDispatch()
 
+  const search=(word)=>{
+    
+    if(word=="")
+      return dispatch(getAll())
+    dispatch(getSearchedMovies(word))
+  }
   
   return (
     <div className="nav-style w-100">
@@ -17,9 +28,9 @@ const NavBar = () => {
           <Col xs="10" lg="11" className=" d-flex align-items-center">
             <div className="search  w-100">
               <i className="fa fa-search"></i>
-              <input onChange={(e) => {
+              <input  onChange={(e) => {
                 search(e.target.value)
-                passWordToApp(e.target.value)
+                
               }} type="text" className="form-control" placeholder="ابحث" />
             </div>
           </Col>
